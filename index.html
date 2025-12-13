@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C13 – Slovenčina a Literatúra</title>
+
+<style>
+/* -------------------- GLOBAL -------------------- */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter','Segoe UI',sans-serif;
+}
+
+body{
+  background:#0e0d0b;
+  color:#f2e9d8;
+  min-height:100vh;
+  padding:1.2rem;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* -------------------- ANIMOVANÉ POZADIE – ATRAMENT -------------------- */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at 20% 30%, #2c1f13, transparent 60%),
+             radial-gradient(circle at 80% 70%, #3a2a18, transparent 60%),
+             linear-gradient(135deg,#1b140d,#0e0d0b);
+  opacity:0.55;
+  z-index:-2;
+}
+
+/* -------------------- IKONY V POZADÍ – LITERÁRNE -------------------- */
+.bg span{
+  position:absolute;
+  font-size:3rem;
+  color:rgba(255,230,180,0.06);
+  z-index:-1;
+  user-select:none;
+}
+
+.bg span:nth-child(1){ top:12%; left:10%; }
+.bg span:nth-child(2){ top:35%; right:12%; }
+.bg span:nth-child(3){ top:55%; left:20%; }
+.bg span:nth-child(4){ top:75%; right:30%; }
+.bg span:nth-child(5){ top:82%; left:65%; }
+
+/* -------------------- HLAVIČKA – ELEGANTNÁ LITERATÚRA -------------------- */
+.gfx-header{
+  text-align:center;
+  margin-bottom:2rem;
+  padding:2rem 1.4rem;
+  background:rgba(255,245,230,0.06);
+  border-radius:22px;
+  border:1px solid rgba(255,230,180,0.18);
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 28px rgba(255,230,180,0.15);
+  position:relative;
+  overflow:hidden;
+}
+
+/* jemné symboly v pozadí */
+.gfx-header::before{
+  content:"📚 ✒️ 📜 ✍️";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-size:3.8rem;
+  letter-spacing:18px;
+  color:rgba(255,230,180,0.05);
+  pointer-events:none;
+}
+
+/* badge */
+.gfx-badge{
+  display:inline-block;
+  padding:6px 16px;
+  margin-bottom:14px;
+  font-size:0.75rem;
+  letter-spacing:1px;
+  color:#0e0d0b;
+  background:linear-gradient(135deg,#c9a86a,#b68a4c,#d8c08f);
+  background-size:200% 200%;
+  animation:badgeMove 6s ease infinite;
+  border-radius:20px;
+  font-weight:700;
+  text-transform:uppercase;
+}
+
+@keyframes badgeMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.gfx-header h1{
+  font-size:2.8rem;
+  font-weight:800;
+  color:#d8c08f;
+  text-shadow:0 0 14px rgba(216,192,143,0.4);
+}
+
+.gfx-underline{
+  width:180px;
+  height:3px;
+  margin:16px auto 0;
+  background:linear-gradient(90deg, transparent, #d8c08f, transparent);
+  animation:glowline 2.4s ease-in-out infinite;
+  border-radius:4px;
+}
+
+@keyframes glowline{
+  0%{ opacity:0.3; transform:scaleX(0.7); }
+  50%{ opacity:1; transform:scaleX(1); }
+  100%{ opacity:0.3; transform:scaleX(0.7); }
+}
+
+/* -------------------- QUESTIONS -------------------- */
+.questions h2{
+  text-align:center;
+  margin-bottom:1.2rem;
+  font-size:1.4rem;
+  color:#d8c08f;
+  font-weight:700;
+}
+
+/* --- GLASSMORPHISM KARTY – PERGAMENOVÝ EFEKT --- */
+.question{
+  background:rgba(255,245,230,0.07);
+  backdrop-filter:blur(8px);
+  border-radius:16px;
+  padding:1.2rem;
+  margin-bottom:1.2rem;
+  border:1px solid rgba(255,230,180,0.15);
+  box-shadow:0 8px 25px rgba(0,0,0,0.35);
+  transition:.25s;
+}
+
+.question:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(216,192,143,0.25);
+}
+
+.q-header{
+  display:flex;
+  align-items:flex-start;
+  gap:.8rem;
+}
+
+.q-num{
+  background:#d8c08f;
+  color:#0e0d0b;
+  font-weight:700;
+  border-radius:10px;
+  padding:.4rem .75rem;
+  font-size:1rem;
+  box-shadow:0 0 10px rgba(216,192,143,0.5);
+}
+
+.q-text{
+  font-size:1.05rem;
+  color:#f2e9d8;
+  line-height:1.45rem;
+}
+
+/* -------------------- CHECKPOINT -------------------- */
+.checkpoint{
+  margin-top:2rem;
+  padding:1.5rem;
+  border-radius:18px;
+  background:rgba(255,245,230,0.08);
+  border:2px dashed #d8c08f;
+  text-align:center;
+  backdrop-filter:blur(6px);
+  box-shadow:0 6px 20px rgba(0,0,0,0.25);
+}
+
+.checkpoint strong{
+  color:#d8c08f;
+  font-size:1.2rem;
+}
+
+/* -------------------- FOOTER -------------------- */
+footer{
+  margin-top:2rem;
+  text-align:center;
+  font-size:.8rem;
+  color:#b8a78a;
+}
+
+.insta-link {
+  display:inline-block;
+  font-size:1.1rem;
+  font-weight:700;
+  color:#d8c08f;
+  text-decoration:none;
+  text-shadow:0 0 10px rgba(216,192,143,0.5);
+  transition:0.3s;
+}
+
+.insta-link:hover {
+  color:#f2e9d8;
+  text-shadow:0 0 14px rgba(216,192,143,0.9);
+  transform:translateY(-2px);
+}
+
+.gfx-footer {
+  margin-top:2rem;
+  text-align:center;
+  font-size:.85rem;
+  color:#d8c08f;
+  text-shadow:0 0 8px rgba(216,192,143,0.3);
+}
+
+.gfx-footer .ornament {
+  font-size:20px;
+  color:#d8c08f;
+  margin-bottom:6px;
+  text-shadow:0 0 10px rgba(216,192,143,0.5);
+}
+
+/* -------------------- MOBILE -------------------- */
+@media(max-width:480px){
+  .gfx-header h1{ font-size:2.2rem; }
+  .q-text{ font-size:1rem; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg">
+  <span>📚</span>
+  <span>✒️</span>
+  <span>📜</span>
+  <span>✍️</span>
+  <span>🔤</span>
+</div>
+
+<header class="gfx-header">
+  <div class="gfx-badge">SSOSTA ESCAPE GAME • LEVEL 5</div>
+  <h1>UČEBŇA 13</h1>
+  <div class="gfx-underline"></div>
+</header>
+
+<main>
+
+<section class="questions">
+  <h2>📚 Úlohy</h2>
+
+  <div class="question">
+    <div class="q-header">
+      <div class="q-num">1</div>
+      <div class="q-text">
+        Nájdite v triede podstatné meno, ktoré sa skloňuje podľa vzoru <strong>„dub“</strong>.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header">
+      <div class="q-num">2</div>
+      <div class="q-text">
+        Objavte akostné prídavné meno, ktoré opisuje niečo v triede alebo na chodbe.
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header">
+      <div class="q-num">3</div>
+      <div class="q-text">
+        Nájdite v okolí slovo s <strong>ypsilonom</strong> (plagát, nástenka, dvere…).
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header">
+      <div class="q-num">4</div>
+      <div class="q-text">
+        „Mám číslo, ale volajú ma inak.  
+        Moje steny sú priezračné a každý vidí, čo sa vo mne deje.“  
+        <br><strong>Aká je moja prezývka?</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="question">
+    <div class="q-header">
+      <div class="q-num">5</div>
+      <div class="q-text">
+        „Usmieva sa, no nevieš, či naozaj.  
+        Sleduje vás každý deň, ale nikdy nič nepovie.“  
+        <br><strong>Kto visí na stene?</strong>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="checkpoint">
+  <p>📩 Odpovede pošli do DM na</p>
+  <a href="https://www.instagram.com/ssosta.escape.game/" 
+     target="_blank" 
+     class="insta-link">
+     @ssosta.escape.game
+  </a>
+</section>
+
+<footer class="gfx-footer">
+  <div class="ornament">✦ ✧ ✦</div>
+  <p>SSOSTA ESCAPE GAME</p>
+</footer>
+
+</body>
+</html>
